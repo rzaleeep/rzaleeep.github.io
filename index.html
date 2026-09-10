@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>棋盘游戏-热门桌游推荐与规则玩法指南</title>
+    <meta name="description" content="探索经典与热门的棋盘游戏世界，提供卡坦岛、璀璨宝石、冷战热斗等桌游的规则详解、玩法策略、选购建议与新手入门指南，助你找到最适合的棋盘游戏。">
+    <meta name="keywords" content="棋盘游戏,桌游推荐,卡坦岛,璀璨宝石,冷战热斗,游戏规则,入门指南">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: #f7f4ee;
+            color: #2c2a26;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: #1e3d2f;
+            color: #f2e9d8;
+            padding: 12px 0;
+            border-bottom: 4px solid #c8a96a;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-icon {
+            font-size: 28px;
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        nav {
+            background-color: #1e3d2f;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        nav ul li a {
+            display: block;
+            color: #e6dcc8;
+            text-decoration: none;
+            padding: 10px 16px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        nav ul li a:hover {
+            background-color: #2c543f;
+            color: #fff;
+        }
+        .hero {
+            background: linear-gradient(145deg, #1e3d2f 0%, #2a5a43 70%, #3a6b52 100%);
+            color: #f7f0e3;
+            padding: 60px 0 70px;
+            text-align: center;
+            position: relative;
+        }
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+        }
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 24px;
+            color: #d9d0b8;
+        }
+        .hero-cta {
+            background-color: #c8a96a;
+            color: #1e3d2f;
+            padding: 12px 32px;
+            border-radius: 30px;
+            font-weight: 700;
+            display: inline-block;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+        .hero-cta:hover {
+            background-color: #dbbd85;
+        }
+        .intro-section {
+            background-color: #fff;
+            padding: 50px 0;
+            border-bottom: 1px solid #e4dccd;
+        }
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .intro-text h2 {
+            font-size: 28px;
+            color: #1e3d2f;
+            margin-bottom: 16px;
+            border-left: 5px solid #c8a96a;
+            padding-left: 14px;
+        }
+        .intro-text p {
+            margin-bottom: 12px;
+            color: #3d3a33;
+        }
+        .intro-feature-list {
+            list-style: none;
+        }
+        .intro-feature-list li {
+            padding: 6px 0;
+            font-size: 16px;
+        }
+        .intro-feature-list li::before {
+            content: "◆";
+            color: #c8a96a;
+            margin-right: 10px;
+        }
+        .categories-section {
+            padding: 50px 0;
+            background-color: #f7f4ee;
+        }
+        .section-title {
+            font-size: 30px;
+            font-weight: 700;
+            color: #1e3d2f;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #7a7568;
+            margin-bottom: 36px;
+            font-size: 15px;
+        }
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .category-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-top: 5px solid #c8a96a;
+        }
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .category-card h3 {
+            font-size: 20px;
+            color: #1e3d2f;
+            margin-bottom: 10px;
+        }
+        .category-card p {
+            font-size: 14px;
+            color: #5a564c;
+        }
+        .category-tag {
+            display: inline-block;
+            background-color: #e9e0ce;
+            color: #1e3d2f;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+        .popular-section {
+            background-color: #fff;
+            padding: 50px 0;
+        }
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .game-card {
+            background-color: #faf8f2;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transition: transform 0.2s;
+        }
+        .game-card:hover {
+            transform: scale(1.02);
+        }
+        .game-card-img {
+            background-color: #d9cbb3;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #1e3d2f;
+        }
+        .game-card-content {
+            padding: 20px;
+        }
+        .game-card h3 {
+            font-size: 20px;
+            color: #1e3d2f;
+            margin-bottom: 6px;
+        }
+        .game-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 13px;
+            color: #8a8577;
+            margin-bottom: 10px;
+        }
+        .game-meta span {
+            background-color: #eae3d5;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+        .game-card p {
+            font-size: 14px;
+            color: #4a463e;
+        }
+        .guide-section {
+            padding: 50px 0;
+            background-color: #f0ece2;
+        }
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+        .guide-item {
+            background-color: #fff;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .guide-item h3 {
+            font-size: 20px;
+            color: #1e3d2f;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e4dccd;
+        }
+        .guide-item p {
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        .guide-item ul {
+            margin-left: 20px;
+            list-style-type: disc;
+        }
+        .guide-item li {
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+        .faq-section {
+            padding: 50px 0;
+            background-color: #fff;
+        }
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            margin-bottom: 16px;
+            border: 1px solid #e4dccd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .faq-question {
+            background-color: #f7f4ee;
+            padding: 16px 20px;
+            font-weight: 700;
+            font-size: 16px;
+            color: #1e3d2f;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-question::after {
+            content: "+";
+            font-size: 22px;
+            color: #c8a96a;
+            font-weight: 400;
+        }
+        .faq-answer {
+            padding: 16px 20px;
+            background-color: #fff;
+            font-size: 15px;
+            color: #4a463e;
+        }
+        .tips-section {
+            background-color: #1e3d2f;
+            color: #e6dcc8;
+            padding: 40px 0;
+        }
+        .tips-section h2 {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 24px;
+            color: #fff;
+        }
+        .tips-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+        }
+        .tip-card {
+            background-color: #2a543f;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 300px;
+            text-align: center;
+        }
+        .tip-card .icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        .tip-card p {
+            font-size: 14px;
+            color: #d9d0b8;
+        }
+        .tip-card strong {
+            color: #fff;
+            display: block;
+            margin-bottom: 6px;
+        }
+        footer {
+            background-color: #1a2e23;
+            color: #b8b2a2;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+        .footer-links {
+            margin-bottom: 10px;
+        }
+        .footer-links a {
+            color: #c8a96a;
+            text-decoration: none;
+            margin: 0 12px;
+        }
+        .footer-links a:hover {
+            color: #fff;
+        }
+        @media (max-width: 900px) {
+            .intro-grid, .guide-grid {
+                grid-template-columns: 1fr;
+            }
+            .category-grid, .game-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 30px;
+            }
+            .header-inner {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+            nav ul {
+                justify-content: center;
+            }
+            .category-grid, .game-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <div class="logo-area">
+                <span class="logo-icon">🎲</span>
+                <span class="logo-text">棋盘游戏汇</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#categories">游戏分类</a></li>
+                    <li><a href="#popular">热门推荐</a></li>
+                    <li><a href="#guide">入门指南</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <h1>发现棋盘游戏的真正乐趣</h1>
+                <p>无论你是初次接触桌游的新手，还是寻找深度策略的老玩家，这里都有值得你尝试的经典之作与新锐选择。从家庭欢聚到硬核对决，从规则解析到策略进阶，一站式了解棋盘游戏的世界。</p>
+                <a href="#popular" class="hero-cta">浏览热门游戏</a>
+            </div>
+        </section>
+
+        <section class="intro-section">
+            <div class="container intro-grid">
+                <div class="intro-text">
+                    <h2>为什么棋盘游戏值得加入你的生活？</h2>
+                    <p>棋盘游戏（Board Game）泛指那些在桌面上进行、依赖棋盘、卡牌、骰子或指示物等物理组件的游戏形式。它不同于电子游戏，强调面对面的互动与真实的触感体验。</p>
+                    <p>现代棋盘游戏早已超越了传统“大富翁”和“飞行棋”的范畴，发展出丰富的机制与主题：工人放置、引擎构筑、合作解谜、区域控制、推理谈判等，适合不同年龄与偏好的人群。在数字时代，棋盘游戏提供了难得的“离线社交”机会。</p>
+                </div>
+                <div>
+                    <ul class="intro-feature-list">
+                        <li>增强面对面沟通与表达能力</li>
+                        <li>培养策略思维与逻辑推理能力</li>
+                        <li>适合家庭聚会、朋友社交等多种场景</li>
+                        <li>每款游戏都有独特的主题与美术风格</li>
+                        <li>从30分钟的轻松小品到数小时的深度体验</li>
+                        <li>收藏与扩展玩法带来长久的乐趣</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="categories-section" id="categories">
+            <div class="container">
+                <h2 class="section-title">棋盘游戏的主要类型</h2>
+                <p class="section-subtitle">了解不同机制与定位，找到适合你的那一款</p>
+                <div class="category-grid">
+                    <div class="category-card">
+                        <h3>🎯 策略类</h3>
+                        <p>强调深度决策与长远规划，玩家需要通过资源管理、区域控制或引擎构建来获取胜利。适合喜欢思考与挑战的玩家。</p>
+                        <span class="category-tag">代表：卡坦岛、璀璨宝石</span>
+                    </div>
+                    <div class="category-card">
+                        <h3>🃏 卡牌类</h3>
+                        <p>以卡牌为核心驱动，包含牌库构筑、手牌管理或谈判吹牛等机制，节奏相对灵活，变化丰富。</p>
+                        <span class="category-tag">代表：领土、爆炸猫</span>
+                    </div>
+                    <div class="category-card">
+                        <h3>🤝 合作类</h3>
+                        <p>所有玩家共同对抗游戏本身设定的挑战，强调沟通、分工与团队协作，体验“同舟共济”的乐趣。</p>
+                        <span class="category-tag">代表：瘟疫危机、僵尸危机</span>
+                    </div>
+                    <div class="category-card">
+                        <h3>🧩 派对类</h3>
+                        <p>规则简单易上手，支持人数较多，适合聚会暖场。通常包含动作、绘画、猜词或谎言推理元素。</p>
+                        <span class="category-tag">代表：行动代号、一夜狼人</span>
+                    </div>
+                    <div class="category-card">
+                        <h3>👨‍👩‍👧 亲子类</h3>
+                        <p>专为儿童与家庭设计，规则直观，回合快速，在游戏中培养孩子的观察力、数字感与规则意识。</p>
+                        <span class="category-tag">代表：卡卡颂儿童版、德国心算王</span>
+                    </div>
+                    <div class="category-card">
+                        <h3>🌍 主题类</h3>
+                        <p>以丰富世界背景与剧情代入为特色，玩家扮演特定角色，在具体情境中达成目标，沉浸感强烈。</p>
+                        <span class="category-tag">代表：冷战热斗、魔戒中洲远征</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="popular-section" id="popular">
+            <div class="container">
+                <h2 class="section-title">热门游戏精选</h2>
+                <p class="section-subtitle">这些游戏在玩家社群中拥有良好口碑，值得优先尝试</p>
+                <div class="game-grid">
+                    <div class="game-card">
+                        <div class="game-card-img">🏝️</div>
+                        <div class="game-card-content">
+                            <h3>卡坦岛</h3>
+                            <div class="game-meta"><span>3-4人</span><span>约60分钟</span><span>策略</span></div>
+                            <p>现代桌游的经典入门之作。玩家扮演拓荒者，通过掷骰子收集资源、建造道路与村庄。交易与谈判是核心乐趣。扩展版支持更多玩家。</p>
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-card-img">💎</div>
+                        <div class="game-card-content">
+                            <h3>璀璨宝石</h3>
+                            <div class="game-meta"><span>2-4人</span><span>约30分钟</span><span>卡牌策略</span></div>
+                            <p>以收集宝石、招募贵族为目标的轻策游戏。规则简单但策略深度不错，节奏明快，美术华丽，是聚会和推新的优秀选择。</p>
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-card-img">🌐</div>
+                        <div class="game-card-content">
+                            <h3>冷战热斗</h3>
+                            <div class="game-meta"><span>2人</span><span>约120分钟</span><span>重度策略</span></div>
+                            <p>长期占据BGG排行榜前列的双人策略游戏。以冷战历史为背景，通过卡牌驱动进行全球影响力争夺。规则复杂但极具深度。</p>
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-card-img">🦠</div>
+                        <div class="game-card-content">
+                            <h3>瘟疫危机</h3>
+                            <div class="game-meta"><span>2-4人</span><span>约45分钟</span><span>合作</span></div>
+                            <p>经典合作游戏。玩家各司其职，共同阻止四种致命疾病的蔓延。沟通与高效行动是关键，紧张感十足。</p>
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-card-img">🕵️</div>
+                        <div class="game-card-content">
+                            <h3>行动代号</h3>
+                            <div class="game-meta"><span>4-8人</span><span>约30分钟</span><span>派对</span></div>
+                            <p>考验默契与联想能力的猜词游戏。队长给出一个词，让队员联想到棋盘上对应的词语。规则简单，非常适合聚会。</p>
+                        </div>
+                    </div>
+                    <div class="game-card">
+                        <div class="game-card-img">🏰</div>
+                        <div class="game-card-content">
+                            <h3>卡卡颂</h3>
+                            <div class="game-meta"><span>2-5人</span><span>约45分钟</span><span>家庭策略</span></div>
+                            <p>通过放置板块拼接地形，并派遣“随从”占据道路、城市或农田来获取分数。规则简单但变化丰富，适合家庭同乐。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide-section" id="guide">
+            <div class="container">
+                <h2 class="section-title">新手入门指南</h2>
+                <p class="section-subtitle">从零开始，顺利开启你的棋盘游戏之旅</p>
+                <div class="guide-grid">
+                    <div class="guide-item">
+                        <h3>第一步：如何选择第一款游戏</h3>
+                        <ul>
+                            <li><strong>考虑人数：</strong>你经常和几个人一起玩？2人、4人或更多人会影响选择范围。</li>
+                            <li><strong>预估时长：</strong>是想要轻松30分钟的小品，还是愿意投入2小时的重度策略？</li>
+                            <li><strong>伙伴偏好：</strong>如果同伴都是新手，优先选择规则简单的游戏；如果都是爱好者，可以尝试进阶作品。</li>
+                            <li><strong>推荐起点：</strong>卡坦岛、璀璨宝石、行动代号都是口碑不错的入门选择。</li>
+                        </ul>
+                    </div>
+                    <div class="guide-item">
+                        <h3>学习规则的技巧</h3>
+                        <ul>
+                            <li><strong>先看视频：</strong>很多游戏在B站或YouTube都有教学视频，比阅读说明书更直观。</li>
+                            <li><strong>第一局试玩：</strong>不用太在意胜负，先熟悉流程。可以公开手牌讨论。</li>
+                            <li><strong>善用玩家帮助：</strong>很多游戏提供玩家提示卡或快速参考。</li>
+                            <li><strong>记住核心机制：</strong>先掌握主要回合流程，再处理特殊规则和细节。</li>
+                        </ul>
+                    </div>
+                    <div class="guide-item">
+                        <h3>哪里可以玩到棋盘游戏</h3>
+                        <ul>
+                            <li><strong>桌游吧/俱乐部：</strong>许多城市有提供游戏租借和场地服务的桌游吧，是体验新游戏的好去处。</li>
+                            <li><strong>线上平台：</strong>Board Game Arena、Tabletopia等网站支持在线游玩部分游戏。</li>
+                            <li><strong>朋友聚会：</strong>可以组织游戏之夜，互相分享各自的收藏。</li>
+                            <li><strong>购买渠道：</strong>电商平台、二手市场或专业桌游店都可以买到正版游戏。</li>
+                        </ul>
+                    </div>
+                    <div class="guide-item">
+                        <h3>购买时需要注意什么</h3>
+                        <ul>
+                            <li><strong>语言版本：</strong>确认是否包含中文规则或中文版游戏。</li>
+                            <li><strong>正版与盗版：</strong>盗版可能存在印刷错误、组件缺失等问题，且损害创作者权益。</li>
+                            <li><strong>检查配件清单：</strong>购买后先核对说明书中的清单。</li>
+                            <li><strong>考虑扩展性：</strong>部分游戏后续有扩展包，可以增加可玩性。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tips-section">
+            <div class="container">
+                <h2>快速上手小贴士</h2>
+                <div class="tips-content">
+                    <div class="tip-card">
+                        <div class="icon">🧑‍🏫</div>
+                        <strong>先教规则再开局</strong>
+                        <p>正式开局前，花几分钟清晰讲解规则。如果有新手，可以简化部分得分规则。</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="icon">🔄</div>
+                        <strong>第一局不计分</strong>
+                        <p>对于复杂游戏，建议第一局只熟悉流程，不计分，让大家轻松上手。</p>
+                    </div>
+                    <div class="tip-card">
+                        <div class="icon">🎯</div>
+                        <strong>关注玩家互动</strong>
+                        <p>棋盘游戏的乐趣在于互动。选择游戏时考虑玩家之间的交流或竞争是否有趣。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section" id="faq">
+            <div class="container">
+                <h2 class="section-title">棋盘游戏常见问题</h2>
+                <p class="section-subtitle">解答你的疑问</p>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">棋盘游戏和桌游有什么区别？</div>
+                        <div class="faq-answer">严格来说，“棋盘游戏”是“桌游”的重要组成部分，通常指带有棋盘或版图的游戏。但在日常交流中，两者经常混用。广义的桌游还包括卡牌游戏、骰子游戏、图版游戏等。本文中提及的“棋盘游戏”泛指这些桌面上的实体游戏。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">适合两个人玩的棋盘游戏有哪些？</div>
+                        <div class="faq-answer">许多游戏都有双人模式。专门为两人设计的游戏包括《冷战热斗》《拼布艺术》《七大奇迹对决》等。另外《卡卡颂》《璀璨宝石》等游戏在双人模式下同样表现出色。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">如何判断一款游戏是否适合自己？</div>
+                        <div class="faq-answer">可以关注游戏的“重度”（复杂度）评分、玩家评价中的偏好描述，以及游戏时长。最直接的方法是去桌游吧试玩，或者观看详细的游玩视频，了解实际体验是否符合预期。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">孩子可以玩棋盘游戏吗？</div>
+                        <div class="faq-answer">当然可以。市面上有很多专门为儿童设计的游戏，比如《卡卡颂儿童版》《拔毛运动会》《德国心算王》等。这些游戏规则简单，主题有趣，能培养孩子的专注力和基础逻辑能力。</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">一套棋盘游戏能玩多久？</div>
+                        <div class="faq-answer">这取决于游戏本身的设计。有些“轻策”游戏玩过几次后可能新鲜感下降，而许多策略游戏因为随机性和玩家互动差异，可以反复游玩数百次。此外，很多游戏都有扩展包，加入新组件和机制，大幅提升重玩价值。</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#home">首页</a> |
+                <a href="#categories">游戏分类</a> |
+                <a href="#popular">热门推荐</a> |
+                <a href="#guide">入门指南</a> |
+                <a href="#faq">常见问题</a>
+            </div>
+            <p>© 2024 棋盘游戏汇 | 本页面为爱好者整理，旨在分享棋盘游戏文化与知识，不涉及任何商业推广。</p>
+        </div>
+    </footer>
+</body>
+  </html>
