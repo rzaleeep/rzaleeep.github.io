@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>x站-热门二次元视频与动漫资源分享平台</title>
+    <meta name="description" content="x站是一个专注于二次元文化、动漫资讯、弹幕视频与同人创作分享的综合性社区平台。在这里发现最新番剧、热门鬼畜、原创音乐与绘画作品，与同好一起畅聊二次元世界。">
+    <meta name="keywords" content="x站,二次元,动漫,番剧,弹幕视频,同人创作,鬼畜,漫画,ACG">
+    <style>
+        /* ===== 全局重置与基础变量 ===== */
+        :root {
+            --primary: #ff7eb3;
+            --primary-dark: #ff5c8a;
+            --accent: #7f5af0;
+            --bg-dark: #16161a;
+            --bg-card: #242629;
+            --bg-light: #fffffe;
+            --text-high: #fffffe;
+            --text-main: #94a1b2;
+            --border-light: #2e2e35;
+            --gradient-main: linear-gradient(135deg, #ff7eb3 0%, #7f5af0 100%);
+            --shadow-main: 0 8px 30px rgba(0, 0, 0, 0.3);
+            --radius-large: 16px;
+            --radius-medium: 10px;
+            --radius-small: 6px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s ease;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-high);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 5px;
+            height: 24px;
+            background: var(--gradient-main);
+            border-radius: 3px;
+        }
+
+        .section-sub {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            margin-top: -20px;
+            margin-bottom: 25px;
+        }
+
+        /* ===== 顶部导航 ===== */
+        .site-header {
+            background-color: rgba(22, 22, 26, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-main);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .main-nav a {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .main-nav a:hover {
+            color: var(--text-high);
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .main-nav a.active {
+            color: white;
+            background: var(--gradient-main);
+            font-weight: 600;
+        }
+
+        .header-search {
+            display: flex;
+            align-items: center;
+            background: var(--bg-card);
+            border-radius: 30px;
+            padding: 5px 5px 5px 18px;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s;
+        }
+
+        .header-search input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-high);
+            font-size: 0.9rem;
+            width: 180px;
+        }
+
+        .header-search button {
+            background: var(--gradient-main);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        /* ===== 首屏 Hero ===== */
+        .hero {
+            background: radial-gradient(circle at 20% 20%, rgba(127, 90, 240, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 126, 179, 0.15) 0%, transparent 50%);
+            padding: 70px 0 80px;
+            position: relative;
+        }
+
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(127, 90, 240, 0.2);
+            border: 1px solid rgba(127, 90, 240, 0.4);
+            border-radius: 20px;
+            color: #a89bd4;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--text-high);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero-title .gradient-text {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            max-width: 550px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-main);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(255, 92, 138, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(255, 92, 138, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-high);
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(255, 126, 179, 0.08);
+        }
+
+        .hero-visual {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-illustration {
+            width: 100%;
+            max-width: 420px;
+            background: var(--bg-card);
+            border-radius: var(--radius-large);
+            padding: 20px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-main);
+            transform: rotate(2deg);
+        }
+
+        .illu-top {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .illu-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff5f57;
+        }
+
+        .illu-dot:nth-child(2) {
+            background: #febc2e;
+        }
+
+        .illu-dot:nth-child(3) {
+            background: #28c840;
+        }
+
+        .illu-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-medium);
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        .illu-bar {
+            height: 14px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .illu-bar.short {
+            width: 60%;
+        }
+
+        .illu-bar.gradient {
+            background: var(--gradient-main);
+        }
+
+        .illu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .illu-card {
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: var(--radius-medium);
+            padding: 18px 12px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        /* ===== 数据统计条 ===== */
+        .stats-bar {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+            padding: 30px 0;
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-high);
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            margin-top: 5px;
+        }
+
+        /* ===== 内容卡片通用 ===== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .content-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-medium);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border-light);
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-main);
+        }
+
+        .card-thumb {
+            height: 140px;
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-thumb .play-icon {
+            font-size: 2.5rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .card-thumb .tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: var(--text-high);
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .card-meta .views {
+            color: var(--primary);
+        }
+
+        /* ===== 番剧区 ===== */
+        .anime-section {
+            padding: 60px 0 20px;
+        }
+
+        .anime-banner {
+            background: linear-gradient(135deg, rgba(127, 90, 240, 0.15), rgba(255, 126, 179, 0.15));
+            border-radius: var(--radius-large);
+            padding: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            border: 1px solid rgba(127, 90, 240, 0.2);
+        }
+
+        .banner-info h3 {
+            color: var(--text-high);
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .banner-info p {
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .banner-btn {
+            background: var(--gradient-main);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .banner-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        /* ===== 排行榜 ===== */
+        .rank-section {
+            padding: 40px 0;
+        }
+
+        .rank-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .rank-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-large);
+            padding: 25px;
+            border: 1px solid var(--border-light);
+        }
+
+        .rank-card h3 {
+            color: var(--text-high);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rank-card h3 .rank-icon {
+            font-size: 1.3rem;
+        }
+
+        .rank-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            border-radius: var(--radius-medium);
+            transition: background 0.2s;
+        }
+
+        .rank-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .rank-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .rank-item:nth-child(1) .rank-num {
+            background: var(--gradient-main);
+            color: white;
+        }
+
+        .rank-item:nth-child(2) .rank-num {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .rank-item:nth-child(3) .rank-num {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+
+        .rank-info {
+            flex: 1;
+        }
+
+        .rank-info .rank-title {
+            color: var(--text-high);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .rank-info .rank-sub {
+            font-size: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .rank-views {
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* ===== 社区/讨论板块 ===== */
+        .community-section {
+            padding: 40px 0 60px;
+        }
+
+        .community-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .topic-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-medium);
+            padding: 20px;
+            border: 1px solid var(--border-light);
+            transition: border-color 0.2s;
+        }
+
+        .topic-card:hover {
+            border-color: var(--primary);
+        }
+
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .topic-title {
+            color: var(--text-high);
+            font-weight: 600;
+        }
+
+        .topic-cat {
+            font-size: 0.75rem;
+            background: rgba(127, 90, 240, 0.2);
+            color: #b6a9e8;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        .topic-desc {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .topic-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.8rem;
+            color: var(--text-main);
+        }
+
+        .topic-meta span i {
+            margin-right: 5px;
+            font-style: normal;
+        }
+
+        /* ===== 创作板块 ===== */
+        .creation-section {
+            padding: 40px 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .creation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .creation-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-medium);
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--border-light);
+            transition: transform 0.2s;
+        }
+
+        .creation-card:hover {
+            transform: scale(1.02);
+        }
+
+        .creation-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .creation-card h4 {
+            color: var(--text-high);
+            margin-bottom: 10px;
+        }
+
+        .creation-card p {
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        /* ===== FAQ ===== */
+        .faq-section {
+            padding: 60px 0;
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border-radius: var(--radius-medium);
+            padding: 20px 25px;
+            border: 1px solid var(--border-light);
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: var(--text-high);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .faq-answer {
+            font-size: 0.92rem;
+            color: var(--text-main);
+        }
+
+        /* ===== 页脚 ===== */
+        .site-footer {
+            background: #0f0f12;
+            border-top: 1px solid var(--border-light);
+            padding: 50px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--text-high);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-main);
+            font-size: 0.9rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-light);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .header-search {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                height: auto;
+                padding: 15px 0;
+                gap: 15px;
+            }
+            .main-nav {
+                width: 100%;
+                justify-content: center;
+                order: 3;
+            }
+            .main-nav a {
+                font-size: 0.85rem;
+                padding: 6px 12px;
+            }
+            .hero {
+                padding: 40px 0 50px;
+            }
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            .hero-desc {
+                font-size: 1rem;
+            }
+            .stats-grid {
+                gap: 20px;
+            }
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            .card-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .card-thumb {
+                height: 110px;
+            }
+            .card-body {
+                padding: 10px;
+            }
+            .card-title {
+                font-size: 0.85rem;
+            }
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn-primary, .btn-outline {
+                text-align: center;
+                width: 100%;
+            }
+        }
+
+        /* ===== 装饰性动画 ===== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .float-anim {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .pulse-anim {
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 顶部导航 ===== -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <div class="logo-icon">X</div>
+                x站
+            </div>
+            <nav class="main-nav">
+                <a href="#" class="active">首页</a>
+                <a href="#anime">番剧</a>
+                <a href="#rank">排行榜</a>
+                <a href="#community">社区</a>
+                <a href="#creation">创作</a>
+                <a href="#faq">帮助</a>
+            </nav>
+            <div class="header-search">
+                <input type="text" placeholder="搜索视频、UP主、番剧...">
+                <button>搜索</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== 首屏 ===== -->
+    <section class="hero">
+        <div class="container hero-inner">
+            <div class="hero-content">
+                <span class="hero-badge">✨ 二次元同好聚集地</span>
+                <h1 class="hero-title">发现属于你的<br><span class="gradient-text">二次元世界</span></h1>
+                <p class="hero-desc">x站是一个充满活力的ACG内容分享平台。这里有最新的番剧资讯、精彩的弹幕视频、原创的同人作品，以及一群热爱二次元的伙伴。无论你是资深宅还是新入坑的萌新，都能在这里找到属于自己的快乐。</p>
+                <div class="hero-actions">
+                    <a href="#anime" class="btn-primary">开始探索</a>
+                    <a href="#community" class="btn-outline">加入社区</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-illustration float-anim">
+                    <div class="illu-top">
+                        <span class="illu-dot"></span>
+                        <span class="illu-dot"></span>
+                        <span class="illu-dot"></span>
+                    </div>
+                    <div class="illu-box">
+                        <div class="illu-bar gradient"></div>
+                        <div class="illu-bar short"></div>
+                        <div class="illu-bar" style="width: 80%;"></div>
+                    </div>
+                    <div class="illu-grid">
+                        <div class="illu-card">🎬 视频</div>
+                        <div class="illu-card">📺 番剧</div>
+                        <div class="illu-card">🎨 绘画</div>
+                        <div class="illu-card">🎵 音乐</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 数据统计 ===== -->
+    <div class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">100万+</div>
+                    <div class="stat-label">注册用户</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50万+</div>
+                    <div class="stat-label">投稿作品</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2000+</div>
+                    <div class="stat-label">合作UP主</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">独家番剧</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 热门番剧 ===== -->
+    <section class="anime-section" id="anime">
+        <div class="container">
+            <h2 class="section-title">热门番剧推荐</h2>
+            <p class="section-sub">每周更新，追番不迷路</p>
+            
+            <div class="anime-banner">
+                <div class="banner-info">
+                    <h3>🔥 本季新番放送中</h3>
+                    <p>多部人气作品同步更新，快来pick你的本季最佳！</p>
+                </div>
+                <a href="#" class="banner-btn">查看全部新番</a>
+            </div>
+
+            <div class="card-grid">
+                <div class="content-card">
+                    <div class="card-thumb">
+                        <span class="tag">连载中</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">星之回响</div>
+                        <div class="card-meta">
+                            <span>更新至12话</span>
+                            <span class="views">🔥 12.5万</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <div class="card-thumb">
+                        <span class="tag">完结</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">幻境物语</div>
+                        <div class="card-meta">
+                            <span>全24话</span>
+                            <span class="views">🔥 8.3万</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <div class="card-thumb">
+                        <span class="tag">连载中</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">机甲纪元</div>
+                        <div class="card-meta">
+                            <span>更新至8话</span>
+                            <span class="views">🔥 6.7万</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <div class="card-thumb">
+                        <span class="tag">新番</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">恋语心声</div>
+                        <div class="card-meta">
+                            <span>更新至3话</span>
+                            <span class="views">🔥 4.2万</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <div class="card-thumb">
+                        <span class="tag">完结</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">剑与魔法</div>
+                        <div class="card-meta">
+                            <span>全12话</span>
+                            <span class="views">🔥 9.8万</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <div class="card-thumb">
+                        <span class="tag">连载中</span>
+                        <span class="play-icon">▶</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title">偶像练习室</div>
+                        <div class="card-meta">
+                            <span>更新至15话</span>
+                            <span class="views">🔥 7.1万</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 排行榜 ===== -->
+    <section class="rank-section" id="rank">
+        <div class="container">
+            <h2 class="section-title">热门排行榜</h2>
+            <p class="section-sub">看看大家都在看什么</p>
+            
+            <div class="rank-wrapper">
+                <div class="rank-card">
+                    <h3><span class="rank-icon">📈</span> 视频播放榜</h3>
+                    <div class="rank-list">
+                        <div class="rank-item">
+                            <span class="rank-num">1</span>
+                            <div class="rank-info">
+                                <div class="rank-title">【高燃混剪】年度神作TOP50</div>
+                                <div class="rank-sub">UP主: 剪辑狂人</div>
+                            </div>
+                            <span class="rank-views">98.2万</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-num">2</span>
+                            <div class="rank-info">
+                                <div class="rank-title">鬼畜全明星大乱斗</div>
+                                <div class="rank-sub">UP主: 鬼畜区一哥</div>
+                            </div>
+                            <span class="rank-views">76.5万</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-num">3</span>
+                            <div class="rank-info">
+                                <div class="rank-title">【翻唱】恋爱循环 中文版</div>
+                                <div class="rank-sub">UP主: 声乐小天使</div>
+                            </div>
+                            <span class="rank-views">65.3万</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-num">4</span>
+                            <div class="rank-info">
+                                <div class="rank-title">【手书】我的青春恋爱物语</div>
+                                <div class="rank-sub">UP主: 手绘达人</div>
+                            </div>
+                            <span class="rank-views">52.8万</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="rank-card">
+                    <h3><span class="rank-icon">⭐</span> 番剧追番榜</h3>
+                    <div class="rank-list">
+                        <div class="rank-item">
+                            <span class="rank-num">1</span>
+                            <div class="rank-info">
+                                <div class="rank-title">星之回响</div>
+                                <div class="rank-sub">连载中 · 第1季</div>
+                            </div>
+                            <span class="rank-views">45.6万</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-num">2</span>
+                            <div class="rank-info">
+                                <div class="rank-title">幻境物语</div>
+                                <div class="rank-sub">已完结 · 全24话</div>
+                            </div>
+                            <span class="rank-views">38.9万</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-num">3</span>
+                            <div class="rank-info">
+                                <div class="rank-title">机甲纪元</div>
+                                <div class="rank-sub">连载中 · 第2季</div>
+                            </div>
+                            <span class="rank-views">31.2万</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-num">4</span>
+                            <div class="rank-info">
+                                <div class="rank-title">剑与魔法</div>
+                                <div class="rank-sub">已完结 · 全12话</div>
+                            </div>
+                            <span class="rank-views">28.7万</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="rank-card">
+                    <h3><span class="rank-icon">👑</span> UP主新人榜</h3>
+                    <div class="rank-list">
+                        <div class="rank-item">
+                            <span class="rank-num">1</span>
+                            <div class="rank-info">
+                                <div class="rank-title">萌新小画家</div>
+                                <div class="rank-sub">绘画 · 3个月粉丝破万</div>
+                            </div>
+                            <span class="rank-views">🔥 火</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-num">2</span>
+                            <div class="rank-info">
+                                <div class="rank-title">游戏研究社</div>
+                                <div class="rank-sub">游戏 · 深度解说</div>
+                            </div>
+                            <span class="rank-views">🔥 火</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-num">3</span>
+                            <div class="rank-info">
+                                <div class="rank-title">音乐小站</div>
+                                <div class="rank-sub">音乐 · 原创编曲</div>
+                            </div>
+                            <span class="rank-views">🔥 火</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-num">4</span>
+                            <div class="rank-info">
+                                <div class="rank-title">日常记录册</div>
+                                <div class="rank-sub">生活 · Vlog分享</div>
+                            </div>
+                            <span class="rank-views">📈 上升</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 社区讨论 ===== -->
+    <section class="community-section" id="community">
+        <div class="container">
+            <h2 class="section-title">社区热门话题</h2>
+            <p class="section-sub">和同好一起讨论你感兴趣的内容</p>
+            
+            <div class="community-grid">
+                <div class="topic-card">
+                    <div class="topic-header">
+                        <span class="topic-title">大家觉得本季最强番是哪部？</span>
+                        <span class="topic-cat">讨论</span>
+                    </div>
+                    <p class="topic-desc">最近在追星之回响和幻境物语，两部都很棒！星之回响的剧情和制作都在线，幻境物语的画风真的太美了。大家觉得哪部更值得推荐？</p>
+                    <div class="topic-meta">
+                        <span><i>💬</i> 328条回复</span>
+                        <span><i>👍</i> 1.2k</span>
+                    </div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-header">
+                        <span class="topic-title">【绘画接龙】夏日祭主题</span>
+                        <span class="topic-cat">活动</span>
+                    </div>
+                    <p class="topic-desc">这个月绘画区活动来啦！以夏日祭为主题创作你的作品，可以是插画、漫画或者像素画，优秀作品将获得首页推荐位哦！</p>
+                    <div class="topic-meta">
+                        <span><i>💬</i> 156条回复</span>
+                        <span><i>👍</i> 892</span>
+                    </div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-header">
+                        <span class="topic-title">求推荐一些冷门宝藏番剧</span>
+                        <span class="topic-cat">求助</span>
+                    </div>
+                    <p class="topic-desc">最近剧荒了，想找一些比较冷门但质量很高的番剧。题材不限，最好是那种看完会让人回味很久的作品，求各位大佬推荐！</p>
+                    <div class="topic-meta">
+                        <span><i>💬</i> 214条回复</span>
+                        <span><i>👍</i> 654</span>
+                    </div>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-header">
+                        <span class="topic-title">【翻唱活动】Vocaloid经典曲目</span>
+                        <span class="topic-cat">音乐</span>
+                    </div>
+                    <p class="topic-desc">音乐区新一轮翻唱活动开始啦！挑选一首你最喜欢的Vocaloid歌曲进行翻唱，风格不限，快来展示你的歌喉吧！</p>
+                    <div class="topic-meta">
+                        <span><i>💬</i> 98条回复</span>
+                        <span><i>👍</i> 431</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 创作板块 ===== -->
+    <section class="creation-section" id="creation">
+        <div class="container">
+            <h2 class="section-title">创作者入驻</h2>
+            <p class="section-sub">用你的才华点亮这个社区</p>
+            
+            <div class="creation-grid">
+                <div class="creation-card">
+                    <span class="creation-icon">🎬</span>
+                    <h4>视频创作</h4>
+                    <p>剪辑、混剪、鬼畜、科普，用视频表达你的创意。</p>
+                </div>
+                <div class="creation-card">
+                    <span class="creation-icon">🎨</span>
+                    <h4>绘画创作</h4>
+                    <p>插画、漫画、手书、像素画，展现你的艺术天赋。</p>
+                </div>
+                <div class="creation-card">
+                    <span class="creation-icon">🎵</span>
+                    <h4>音乐创作</h4>
+                    <p>翻唱、原创、编曲、演奏，让世界听到你的声音。</p>
+                </div>
+                <div class="creation-card">
+                    <span class="creation-icon">✍️</span>
+                    <h4>文章创作</h4>
+                    <p>番剧点评、科普专栏、同人小说，用文字打动人心。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <h2 class="section-title">常见问题</h2>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3 class="faq-question">Q: x站是什么网站？</h3>
+                    <p class="faq-answer">x站是一个综合性的二次元内容分享社区，提供番剧观看、弹幕视频、同人创作、社区讨论等多种功能。用户可以在这里观看视频、发表弹幕、参与话题讨论，也可以上传自己的原创作品。</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Q: 如何在x站发布自己的视频？</h3>
+                    <p class="faq-answer">注册账号后，点击页面右上角的"投稿"按钮，按照提示填写视频信息并上传即可。新上传的视频会经过审核，审核通过后就会发布到对应的分区中。</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Q: 观看视频需要付费吗？</h3>
+                    <p class="faq-answer">x站大部分内容都是免费观看的。部分独家番剧和会员专属内容需要开通大会员才能观看。普通用户也可以正常使用弹幕、评论等基础功能。</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Q: 如何成为x站的签约UP主？</h3>
+                    <p class="faq-answer">当你的账号达到一定粉丝量且持续产出优质内容后，会收到官方的签约邀请。你也可以在创作中心主动申请签约，官方会根据你的内容质量和影响力进行审核。</p>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question">Q: 遇到视频加载问题怎么办？</h3>
+                    <p class="faq-answer">建议先尝试刷新页面或切换网络。如果问题依然存在，可以检查浏览器缓存或更换浏览器试试。也可以联系客服反馈具体问题，我们会尽快为你解决。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 页脚 ===== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <ul>
+                        <li><a href="#">关于x站</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">友情链接</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>帮助中心</h4>
+                    <ul>
+                        <li><a href="#">新手指南</a></li>
+                        <li><a href="#">投稿帮助</a></li>
+                        <li><a href="#">违规举报</a></li>
+                        <li><a href="#">意见反馈</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关注我们</h4>
+                    <ul>
+                        <li><a href="#">官方微博</a></li>
+                        <li><a href="#">微信公众号</a></li>
+                        <li><a href="#">官方抖音</a></li>
+                        <li><a href="#">哔哩哔哩</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>合作洽谈</h4>
+                    <ul>
+                        <li><a href="#">商务合作</a></li>
+                        <li><a href="#">版权说明</a></li>
+                        <li><a href="#">用户协议</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 x站 - 二次元内容分享社区 | 本网站内容仅供娱乐交流使用</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</body>
+  </html>
